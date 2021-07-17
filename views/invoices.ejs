@@ -1,0 +1,50 @@
+<%- include('./partials/header.ejs') %>
+<div class="container">
+    <header class="jumbotron">
+        <h1>Invoices</h1>
+        <p>
+            <a class="btn btn-primary btn-large" href="/invoices/new">Add Invoice</a>
+        </p>
+    </header>
+    
+    <div class="row" style="display:flex; flex-wrap: wrap;">
+        <% invoices.forEach(function(invoice){ %>
+        <div class="col-md-3 col-sm-6">
+            <div class="row">
+                <div class="col-xs-12"><p>ID: <%= invoice["id"] %></p></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6"><p>To: <%= invoice["to"] %></p></div>
+                <div class="col-xs-6"><p>From: <%= invoice["from"] %></p></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6"><p>Due: <%= invoice["due"] %></p></div>
+                <div class="col-xs-6"><p>Status: <%= invoice["status"] %></p></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12"><p><%= invoice["notes"] %></p></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center"><p>INVOICE</p></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-9"><p>Item</p></div>
+                <div class="col-xs-3"><p>Price</p></div>
+            </div>
+            <% invoice["items"].forEach(function(item){ %>
+            <div class="row">
+                <div class="col-xs-9"><p><%= item["name"] %></p></div>
+                <div class="col-xs-3"><p><%= item["cost"] %></p></div>
+            </div>
+            <% }) %>
+            <form action="/invoice/<%= invoice["id"] %>" method="POST">
+                <div class="row">
+                    <div class="col-xs-12"><input class="form-control" type="text" name="stat" placeholder="Update Status"></div>
+                </div>
+            </form>
+        </div>
+        <% }) %>
+    </div>
+</div>
+
+<%- include('./partials/footer.ejs') %>
