@@ -1,0 +1,37 @@
+<%- include('./partials/header.ejs') %>
+<div class="container">
+<header class="jumbotron">
+    <h1>Create a New Invoice</h1>
+    <p><a class="btn btn-primary btn-large" href="/invoices">Go Back</a></p>
+</header>   
+<form action="/invoices" method="POST">
+    <div class="row">
+        <div class="col-xs-6"><input class="form-control" type="text" name="to" placeholder="to"></div>
+        <div class="col-xs-6"><input class="form-control" type="text" name="from" placeholder="from"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6"><input class="form-control" type="text" name="due" placeholder="due"></div>
+        <div class="col-xs-6"><input class="form-control" type="text" name="stat" placeholder="status"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12"><input class="form-control" type="text" name="notes" placeholder="notes"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12"><input type="text" class="form-control addItem" placeholder="Press Enter to Add Item"></div>
+    </div>
+    <ul class="items" name="items">
+    </ul>
+    <button class="btn btn-large">Submit</button>
+</form>
+</div>
+<script>
+$(".addItem").keypress(function(e){
+	if(e.which === 13){
+	    e.preventDefault();
+		var text = $(this).val();
+		$(this).val("");
+		$(".items").append('<div class="row"><div class="col-xs-4"><input class="form-control" type="text" name="itemname" placeholder="Item Name"></div><div class="col-xs-4"><input class="form-control" type="text" name="cost" placeholder="Price"></div><div class="col-xs-4"><input class="form-control" type="text" name="misc" placeholder="Misc"></div></div>');
+	}
+})
+</script>
+<%- include('./partials/footer.ejs') %>
