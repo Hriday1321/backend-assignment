@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static("public"));
 
-app.use("/", require("./routes/api"))
+app.use("/", require("./routes/api"));
+app.use("/email", require("./routes/email.js"))
 
 app.listen(process.env.PORT, process.env.IP, function(){
  console.log("server started");
